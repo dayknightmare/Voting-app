@@ -1,0 +1,6 @@
+@import url('https://vupy.github.io/Soft-UI-Interface/SoftUi/css/main.css');
+
+div.banner{
+    max-width: 100%;
+    height: 100vh;
+}
