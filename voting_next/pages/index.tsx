@@ -1,11 +1,16 @@
-import { useState } from "react";
 import Nav from "../components/navBar";
-
 
 function Home(){
     return (
         <>
-            <Nav></Nav>
+            <Nav itens={[
+                {
+                    type: "button",
+                    text: "Login",
+                    link: "/login"
+                }
+            ]}></Nav>
+
             <main>
                 <div className="banner flex__column flex__justify__center flex_align__center padh-2">
                     <h1>Bem vindo ao Voting</h1>
