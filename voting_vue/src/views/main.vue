@@ -1,6 +1,8 @@
 <template>
     <div>
-        <NavBar colors="#fff"></NavBar>
+        <NavBar colors="#fff" :itensChildren="[
+            {type: 'button', link: '/login', text: 'Login'},
+        ]"></NavBar>
         <main>
             <div class="banner flex__column flex__justify__center flex_align__center padh-2">
                 <h1>Bem vindo ao Voting</h1>
@@ -8,7 +10,9 @@
 
                 <br>
                 <div>
-                   <button class="pub">Cadastre-se</button>
+                    <router-link to="/cadastro">
+                       <button class="pub">Cadastre-se</button>
+                    </router-link>
                 </div>
             </div>
         </main>

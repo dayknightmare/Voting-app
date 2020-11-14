@@ -6,7 +6,7 @@ class VshHash{
         let s: number = 0;
         let sal: string;
         let numbers: Array<number> = [2, 3, 5, 7];
-        let x;
+        let x: number;
 
         if (capo != ''){
             x = parseInt(capo[0])
@@ -25,13 +25,13 @@ class VshHash{
         }
 
         for (const i of text){
-            let n: number = (i.charCodeAt(0) << 2) + 2 + s
+            let n: number = (Math.pow(i.charCodeAt(0), 2) << 2) + 2 + s
             n = n >> x
             out += (n + keywork).toString(16)
         }
-
+        
         out = ((parseInt(out, 16) << 1) * 13 + 3).toString(16)
-
+        
         return `${sal}.${x}${out}`
     }
 
@@ -48,24 +48,14 @@ class VshHash{
         return `${x}${parseInt(n, 16)}`
     }
 
-    verify(code : string, word : string, salt : string = 'vsninc') : boolean{
-        const capos: string = code.split('.')[1][0] + code[0]
+    verify(hash : string, word : string, salt : string = 'vsninc') : boolean{
+        const capos: string = hash.split('.')[1][0] + hash[0]
         const has: string = this.make_hash(word, salt, capos)
 
-        console.log(code, has);
+        console.log(hash, has);
         
-        return code == has
+        return hash == has
     }
 }
 
-// const vsn = new VshHash()
-// let has = vsn.make_hash("myWord")
-// let hasSalt = vsn.make_hash("myWord", 'kuma')
-
-// console.log();
-
-// console.log(`Texto entrada: myWord\nTexto saída: ${has}\nTexto saída salt: ${hasSalt}`);
-// console.log(`\nmyWord == ${has}: ${vsn.verify(has, 'myWord')}`);
-// console.log(`myWord == ${hasSalt}: ${vsn.verify(hasSalt, 'myWord', 'kuma')}`);
-
-// console.log();
+export default VshHash

@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var VshHash = /** @class */ (function () {
     function VshHash() {
     }
@@ -24,7 +26,7 @@ var VshHash = /** @class */ (function () {
         }
         for (var _a = 0, text_1 = text; _a < text_1.length; _a++) {
             var i = text_1[_a];
-            var n = (i.charCodeAt(0) << 2) + 2 + s;
+            var n = (Math.pow(i.charCodeAt(0), 2) << 2) + 2 + s;
             n = n >> x;
             out += (n + keywork).toString(16);
         }
@@ -42,20 +44,13 @@ var VshHash = /** @class */ (function () {
         }
         return "" + x + parseInt(n, 16);
     };
-    VshHash.prototype.verify = function (code, word, salt) {
+    VshHash.prototype.verify = function (hash, word, salt) {
         if (salt === void 0) { salt = 'vsninc'; }
-        var capos = code.split('.')[1][0] + code[0];
+        var capos = hash.split('.')[1][0] + hash[0];
         var has = this.make_hash(word, salt, capos);
-        console.log(code, has);
-        return code == has;
+        console.log(hash, has);
+        return hash == has;
     };
     return VshHash;
 }());
-// const vsn = new VshHash()
-// let has = vsn.make_hash("myWord")
-// let hasSalt = vsn.make_hash("myWord", 'kuma')
-// console.log();
-// console.log(`Texto entrada: myWord\nTexto saída: ${has}\nTexto saída salt: ${hasSalt}`);
-// console.log(`\nmyWord == ${has}: ${vsn.verify(has, 'myWord')}`);
-// console.log(`myWord == ${hasSalt}: ${vsn.verify(hasSalt, 'myWord', 'kuma')}`);
-// console.log();
+exports["default"] = VshHash;
