@@ -1,7 +1,8 @@
 import express, {Router, Request, Response} from "express";
+import { genToken, openToken } from '../helpers/genToken';
 import { mongoDB } from '../controller/dbcontroller';
 import vshHash from "../helpers/vsnhash";
-import { genToken, openToken } from '../helpers/genToken';
+import mongo from "mongodb";
 
 const routes: Router = express.Router()
 
@@ -38,6 +39,7 @@ routes.post("/login", async (req: Request, res: Response) => {
     return res.send("Senha e/ou email inválidos")
 })
 
+
 routes.post("/cadastro", async (req: Request, res: Response) => {
     const hasher: vshHash = new vshHash()
     const db = await mongoDB();
@@ -68,7 +70,7 @@ routes.post("/cadastro", async (req: Request, res: Response) => {
         exp: Math.floor(Date.now() / 1000) + (60 * 60 * 24 * 2)
     })
     
-    await coll.updateOne({_id: lastId[0]._id}, {$set: {token: token}})
+    await coll.updateOne({_id: new mongo.ObjectID(lastId[0]._id)}, {$set: {token: token}})
 
     res.send({
         token,
