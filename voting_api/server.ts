@@ -5,6 +5,7 @@ import cors = require('cors');
 import agents = require('express-useragent');
 
 const users = require('./routes/user');
+const vote = require('./routes/vote');
 
 const app:express.Application = express();
 
@@ -19,6 +20,7 @@ app.set('trust proxy', 1);
 
 
 app.use("/", users);
+app.use("/vote", vote);
 
 app.get("/", (req: express.Request, res: express.Response) => {
     res.send("Hello from Voting app API")

@@ -1,5 +1,5 @@
 <template>
-	<div id="app" class="app">
+	<div id="app" class="app font__nunito">
 		<router-view></router-view>
 	</div>
 </template>
@@ -28,6 +28,8 @@
 </style>
 
 
-<style scoped>
+<style lang="scss">
+	@import url("https://vupy.github.io/Soft-UI-Interface/SoftUi/css/icons.css");
 	@import url("https://vupy.github.io/Soft-UI-Interface/SoftUi/css/main.css");
+
 </style>

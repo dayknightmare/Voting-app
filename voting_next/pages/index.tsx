@@ -1,7 +1,18 @@
+import Link from "next/link";
+import { useState } from "react";
+import Guard from "../components/guardLogin";
 import Nav from "../components/navBar";
 
 function Home(){
-    return (
+    const [renderPage, setRenderPage] = useState(false);
+    
+    Guard(0).then(re => {
+        if (re){
+            setRenderPage(re)
+        }
+    })
+    
+    return renderPage &&
         <>
             <Nav itens={[
                 {
@@ -18,13 +29,13 @@ function Home(){
 
                     <br />
                     <div>
-                        <button className="pub">Cadastre-se</button>
+                        <Link href="/cadastro">
+                            <button className="pub">Cadastre-se</button>
+                        </Link>
                     </div>
                 </div>
             </main>
         </>
-    );
-    
 }
 
 export default Home;

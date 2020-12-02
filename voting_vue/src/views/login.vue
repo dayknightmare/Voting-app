@@ -11,12 +11,12 @@
                 <form class="flex__column flex__align__center flex__justify__center" @submit.prevent="makeLogin">
                     <div class="w-50">
                         <h3 class="padb-2">Fazer login</h3>
-                        <div class="input__hero__label padb-1 w-100">
+                        <div class="input__hero__label marb-1 w-100">
                             <input class="input w-100" type="email" v-model="email" placeholder=" " required>
                             <label>Email</label>
                         </div>
 
-                        <div class="input__hero__label padb-1 w-100">
+                        <div class="input__hero__label marb-1 w-100">
                             <input class="input w-100" type="password" v-model="password" placeholder=" " required>
                             <label>Senha</label>
                         </div>
