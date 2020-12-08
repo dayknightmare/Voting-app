@@ -6,13 +6,13 @@
             {type: 'a', link: '/participe', text: 'Participações', icon: 'vi-send'},
             {type: 'a', link: '/minhas', text: 'Minhas votações', icon: 'vi-heart'},
             {type: 'button', link: '/nova', text: 'Nova votação', icon: 'vi-plus'},
-            {type: 'li', link: '/sair', text: 'Sair', icon: 'vi-logout'},
+            {type: 'li', link: '/sair', text: 'Sair', icon: 'vi-logout', logout: true},
         ]"></NavBar>
 
         <main>
             <div class="flex__row flex__justify__center banner">
                 <div class="w-75">
-                    <form class="mar-075 pad-4 flex__column " @submit.prevent="createVoting">
+                    <form class="mar-075 pad-4 flex__column" @submit.prevent="createVoting">
                         <h3 class="marb-2">
                             Nova votação
                         </h3>

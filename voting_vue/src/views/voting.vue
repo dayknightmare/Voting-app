@@ -6,7 +6,7 @@
             {type: 'a', link: '/participe', text: 'Participações', icon: 'vi-send'},
             {type: 'a', link: '/minhas', text: 'Minhas votações', icon: 'vi-heart'},
             {type: 'button', link: '/nova', text: 'Nova votação', icon: 'vi-plus'},
-            {type: 'li', link: '/sair', text: 'Sair', icon: 'vi-logout'},
+            {type: 'li', link: '/sair', text: 'Sair', icon: 'vi-logout', logout: true},
         ]"></NavBar>
 
         <main>
@@ -31,14 +31,14 @@
                             <header>
                                 <div class="flex__column">
                                     <span class="card__header__info">
-                                        {{ i.name }} - 
+                                        {{ i.name }} |  
                                         <span v-if="i.typeVote == 'one'">Escolha única</span>
                                         <span v-if="i.typeVote == 'two'">Escolha binária</span>
-                                        <span v-if="i.typeVote == 'many'">Escolha multipla</span>
+                                        <span v-if="i.typeVote == 'many'">Escolha multipla</span> |
+                                        <span class="card__header__info weight__600 red__text" v-if="new Date(i.limitDate) < new Date()">Fechado</span>
+                                        <span class="card__header__info weight__600 green__text" v-if="new Date(i.limitDate) > new Date()">Aberto</span>
                                     </span>
                                     <span class="card__header__info">{{new Date(i.limitDate).toLocaleString()}}</span>
-                                    <span class="card__header__info weight__600 green__text" v-if="new Date(i.limitDate) > new Date()">Aberto</span>
-                                    <span class="card__header__info weight__600 red__text" v-if="new Date(i.limitDate) < new Date()">Fechado</span>
                                 </div>
                             </header>
                             <p class="text">
@@ -48,6 +48,13 @@
 
                         <div class="card__footer">
                             <div class="item">{{ '9' }} votos</div>
+                            <div class="item marl-auto">
+                                <router-link :to="'/vote/' + i._id">
+                                    <button class="pub min">
+                                        Votar
+                                    </button>
+                                </router-link>
+                            </div>
                         </div>
 
                     </div>

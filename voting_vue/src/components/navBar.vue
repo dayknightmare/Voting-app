@@ -11,7 +11,12 @@
                     </li>
                 </router-link>
 
-                <li v-if="i.type.toLowerCase() == 'li'">
+                <li v-if="i.type.toLowerCase() == 'li' && !i.logout">
+                    <i :class="i.icon + ' padr-025'" v-if="i.icon"></i>
+                    {{i.text}}
+                </li>
+
+                <li v-if="i.type.toLowerCase() == 'li' && i.logout" @click="logout">
                     <i :class="i.icon + ' padr-025'" v-if="i.icon"></i>
                     {{i.text}}
                 </li>
@@ -40,5 +45,12 @@
                 default: function () { return [] }
             }
         },
+
+        methods: {
+            logout(){
+                localStorage.clear();
+                window.location.href = "/"
+            }
+        }
     };
 </script>
