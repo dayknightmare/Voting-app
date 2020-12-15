@@ -1,7 +1,9 @@
 const { MongoClient } = require('mongodb');
-import mongo from "mongodb";
 
-const client = new MongoClient("mongodb://localhost:27017", { useUnifiedTopology: true })
+const url = 'mongodb://localhost:27017'
+const urlDB = `${url}/voting`
+
+const client = new MongoClient(url, { useUnifiedTopology: true })
 
 const mongoDB = async () => {
     await client.connect(async (err: Error) => {
@@ -20,4 +22,4 @@ const getLastRoW = async (coll: any) => {
     return lastId[0]._id
 }
 
-export { mongoDB, client, getLastRoW };
+export { mongoDB, client, getLastRoW, urlDB };

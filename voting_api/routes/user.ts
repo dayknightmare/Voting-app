@@ -1,5 +1,5 @@
 import express, {Router, Request, Response} from "express";
-import { genToken, openToken } from '../helpers/genToken';
+import { genToken } from '../helpers/genToken';
 import { mongoDB } from '../controller/dbcontroller';
 import vshHash from "../helpers/vsnhash";
 import mongo from "mongodb";

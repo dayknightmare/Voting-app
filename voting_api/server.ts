@@ -1,8 +1,9 @@
-import express = require('express');
+import agents = require('express-useragent');
 import bodyParser = require('body-parser');
+import cookie = require('cookie-parser');
+import express = require('express');
 import helmet = require('helmet');
 import cors = require('cors');
-import agents = require('express-useragent');
 
 const users = require('./routes/user');
 const vote = require('./routes/vote');
@@ -16,8 +17,20 @@ app.use(express.json({ limit: '50mb' }))
 app.use(helmet());
 app.use(cors());
 app.use(agents.express());
+app.use(express.static(__dirname + '/static'));
+app.use(cookie());
 app.set('trust proxy', 1);
+app.disable('x-powered-by');
 
+app.use(function (req: any, res: express.Response, next: express.NextFunction) {
+    console.log("\x1b[32m*-+:=============================================:+-*\x1b[37m");
+    console.log("DATE: " + new Date().toLocaleString());
+    console.log("METHOD: " + req.method);
+    console.log("IP: " + req.ip);
+    console.log("ROUTE: " + req.originalUrl + '\n');
+
+    next();
+});
 
 app.use("/", users);
 app.use("/vote", vote);

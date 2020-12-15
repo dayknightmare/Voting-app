@@ -108,6 +108,39 @@ routes.post("/randomvote", async (req: express.Request, res: express.Response) =
         vote: vote
     })
 })
+
+routes.post('/:id', async (req: express.Request, res: express.Response) => {
+    const db: mongo.Db = await mongoDB();
+    const collVote: mongo.Collection = db.collection("voting")
+    const collUser: mongo.Collection = db.collection("users")
+
+    let user = await collUser.findOne({_id: new mongo.ObjectID(req.body.user)})
+
+    if (Object.keys(user).length == 0){
+        res.status(401).send("ERROR")
+        return
+    }
+
+    let vote = await collVote.aggregate([
+        {
+            $lookup: {
+                localField: '_id',
+                foreignField: 'voting_id',
+                from: 'voting_items',
+                as: 'itens'
+            }
+        },
+        {
+            $match: {
+                _id: new mongo.ObjectID(req.params.id)
+            }
+        }
+    ]).toArray()
+
+    res.send({
+        vote: vote[0]
+    })
+})
 // db.voting.aggregate({$lookup: {from: 'voting_items', localField: '_id', foreignField: 'voting_id', as: 'itens'}}).pretty()
 
 module.exports = routes
